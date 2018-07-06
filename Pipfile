@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+apistar = "*"
+
+[dev-packages]
+mypy = "*"
+pylint = "*"
+pytest = "*"
+
+[requires]
+python_version = "3.6"
+
+[scripts]
+start = "python3 src/app.py"
+test = """
+    bash -c '
+        mypy --ignore-missing-imports --follow-imports=skip src tests \
+        && pylint --disable=missing-docstring src tests \
+        && pytest --verbose
+    '
+"""
